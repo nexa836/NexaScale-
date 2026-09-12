@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — NexaScale</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">NexaScale</a>
+    <div class="nav-links">
+      <a href="login.html">Log in</a>
+      <a href="signup.html" class="btn btn-gold" style="padding:8px 16px;">Get started</a>
+    </div>
+  </div>
+</nav>
+
+<section class="section" style="border-bottom:none;">
+  <div class="container">
+    <div class="section-head">
+      <h2>Simple pricing</h2>
+      <p>Start free. Upgrade the day leads start actually coming in.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="price-amount">$0<span>/month</span></div>
+        <ul>
+          <li>1 connected inbox</li>
+          <li>20 AI replies / month</li>
+          <li>Manual approval only</li>
+        </ul>
+        <a href="signup.html" class="btn btn-outline btn-block">Start free</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Pro</h3>
+        <div class="price-amount">$25<span>/month</span></div>
+        <ul>
+          <li>Unlimited connected inboxes</li>
+          <li>Unlimited AI replies</li>
+          <li>Full autopilot mode</li>
+        </ul>
+        <button class="btn btn-gold btn-block" id="upgradeBtn">Upgrade to Pro</button>
+      </div>
+    </div>
+    <p style="color:var(--text-muted); font-size:13px; margin-top:20px; max-width:52ch;">
+      Payments are handled securely by Stripe — NexaScale never sees or stores your card details.
+    </p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">© 2026 NexaScale.</div>
+</footer>
+
+<script>
+/*
+  REAL STRIPE SETUP (this button is a placeholder until you do this):
+  1. Create a free Stripe account at https://stripe.com
+  2. Create a $25/month "Price" for a Product called "NexaScale Pro"
+  3. Easiest no-backend option: use a Stripe Payment Link
+     (Stripe Dashboard → Payment Links → create one for your $25 price)
+     Then replace the alert() below with:
+     window.location.href = "https://buy.stripe.com/your-real-link";
+  4. Money goes straight to YOUR Stripe account, in your name — Claude
+     cannot create this account or link for you, only you can, since it
+     needs your bank details.
+*/
+document.getElementById('upgradeBtn').addEventListener('click', () => {
+  alert('Connect your own Stripe Payment Link here — see the comment in this page\'s code for the 3-step setup.');
+});
+</script>
+
+</body>
+</html>

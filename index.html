@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaScale — AI that replies to your leads before they cool off</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo">NexaScale</div>
+    <div class="nav-links">
+      <a href="pricing.html">Pricing</a>
+      <a href="login.html">Log in</a>
+      <a href="signup.html" class="btn btn-gold" style="padding:8px 16px;">Get started</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-eyebrow">AI lead response, connected to your own inbox</div>
+      <h1>Every lead gets a reply before they lose interest.</h1>
+      <p class="lede">NexaScale watches your Gmail or business inbox, drafts a reply in your voice using AI, and sends it in seconds — even at 2am, even on weekends.</p>
+      <div class="hero-actions">
+        <a href="signup.html" class="btn btn-gold">Start free</a>
+        <a href="pricing.html" class="btn btn-outline">See pricing</a>
+      </div>
+    </div>
+    <div class="feed-panel">
+      <div class="feed-header">
+        <span class="live-dot"></span>
+        Live lead responses
+      </div>
+      <div class="feed-body" id="feedBody"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Built for the inbox you already use</h2>
+      <p>No new app for your customers to learn. NexaScale sits quietly behind the email or form you already have.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Gmail &amp; SMTP connected</h3>
+        <p>Link your business email once. NexaScale reads incoming leads and replies from the same address, so nothing looks automated.</p>
+      </div>
+      <div class="feature">
+        <h3>Replies in your tone</h3>
+        <p>Set a few examples of how you normally write, and every AI reply matches your voice — not a generic script.</p>
+      </div>
+      <div class="feature">
+        <h3>You approve or automate</h3>
+        <p>Start with drafts you approve before sending, then switch to full autopilot once you trust the replies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-bottom:none;">
+  <div class="container">
+    <div class="section-head">
+      <h2>One plan, no surprises</h2>
+      <p>Free while you're testing it out. Upgrade when leads start coming in for real.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="price-amount">$0<span>/month</span></div>
+        <ul>
+          <li>1 connected inbox</li>
+          <li>20 AI replies / month</li>
+          <li>Manual approval only</li>
+        </ul>
+        <a href="signup.html" class="btn btn-outline btn-block">Start free</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Pro</h3>
+        <div class="price-amount">$25<span>/month</span></div>
+        <ul>
+          <li>Unlimited connected inboxes</li>
+          <li>Unlimited AI replies</li>
+          <li>Full autopilot mode</li>
+        </ul>
+        <a href="pricing.html" class="btn btn-gold btn-block">Upgrade to Pro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">© 2026 NexaScale. Built for businesses who don't want to lose a lead again.</div>
+</footer>
+
+<script>
+const leads = [
+  { name: "Priya Sharma", msg: "Hi, do you deliver to Andheri West?", reply: "Yes, we deliver to Andheri West daily before 8pm. Want me to note your address?" },
+  { name: "Rahul Mehta", msg: "What's the price for the 2BHK package?", reply: "The 2BHK package starts at ₹45,000. I can send the full breakdown — what's your email?" },
+  { name: "Sara K.", msg: "Is the Saturday slot still open?", reply: "Saturday 11am is still open. Shall I hold it for you?" },
+  { name: "Ankit R.", msg: "Do you offer a trial before signing up?", reply: "Yes — a 7-day free trial, no card needed. Want the signup link?" }
+];
+
+const feedBody = document.getElementById('feedBody');
+
+function renderFeed() {
+  feedBody.innerHTML = '';
+  leads.forEach((lead, i) => {
+    const item = document.createElement('div');
+    item.className = 'feed-item';
+    item.style.animationDelay = (i * 0.15) + 's';
+    item.innerHTML = `
+      <div class="lead-name">${lead.name} <span class="tag">replied in 8s</span></div>
+      <div class="lead-msg">${lead.msg}</div>
+      <div class="ai-reply">${lead.reply}</div>
+    `;
+    feedBody.appendChild(item);
+  });
+}
+renderFeed();
+</script>
+
+</body>
+</html>

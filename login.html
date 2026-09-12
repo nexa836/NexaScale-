@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log in — NexaScale</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <a href="index.html" class="logo" style="text-align:center;display:block;">NexaScale</a>
+    <h1>Welcome back</h1>
+    <p class="sub">Log in to check your leads</p>
+
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@business.com" required>
+        <div class="field-error" id="emailError">Enter a valid email address.</div>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" required minlength="6">
+        <div class="field-error" id="passwordError">Password must be at least 6 characters.</div>
+      </div>
+      <button type="submit" class="btn btn-gold btn-block">Log in</button>
+      <div class="form-msg" id="formMsg"></div>
+    </form>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="signup.html">Sign up</a>
+    </div>
+  </div>
+</div>
+
+<script src="auth-demo.js"></script>
+<script>
+NexaAuth.wireLoginForm({
+  formId: 'loginForm',
+  emailId: 'email',
+  passwordId: 'password',
+  emailErrorId: 'emailError',
+  passwordErrorId: 'passwordError',
+  msgId: 'formMsg',
+  onSuccess: () => { window.location.href = 'dashboard.html'; }
+});
+</script>
+
+</body>
+</html>
