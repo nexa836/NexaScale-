@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — NexaScale</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <a href="index.html" class="logo">NexaScale</a>
+    <a href="dashboard.html" class="side-link active">Dashboard</a>
+    <a href="#leads" class="side-link">Leads</a>
+    <a href="#settings" class="side-link">Connections</a>
+    <a href="pricing.html" class="side-link">Billing</a>
+    <a href="#" class="side-link" id="logoutBtn">Log out</a>
+  </aside>
+
+  <main class="main-panel">
+    <div class="topbar">
+      <h1>Welcome back<span id="userNameSpan"></span></h1>
+      <span class="badge" id="planBadge">Starter plan</span>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="label">Leads this month</div>
+        <div class="value">14</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">AI replies sent</div>
+        <div class="value">12</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Avg. response time</div>
+        <div class="value">9s</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Replies left this month</div>
+        <div class="value">8</div>
+      </div>
+    </div>
+
+    <div class="panel" id="settings">
+      <div class="panel-head">
+        <h2>Email connections</h2>
+      </div>
+      <div class="panel-body">
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">Gmail</div>
+            <div class="setting-desc">Read incoming leads and send AI replies from your Gmail address.</div>
+          </div>
+          <button class="btn btn-outline" id="gmailBtn">Connect</button>
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">Custom SMTP</div>
+            <div class="setting-desc">Use your own business email server instead of Gmail.</div>
+          </div>
+          <button class="btn btn-outline" id="smtpBtn">Set up</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>AI reply settings</h2>
+      </div>
+      <div class="panel-body">
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">Reply mode</div>
+            <div class="setting-desc">Draft for your approval, or send automatically.</div>
+          </div>
+          <span class="badge">Manual approval</span>
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">Response tone</div>
+            <div class="setting-desc">Friendly and direct — based on your sample replies.</div>
+          </div>
+          <button class="btn btn-outline">Edit tone</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Plan</h2>
+      </div>
+      <div class="panel-body">
+        <div class="setting-row">
+          <div>
+            <div class="setting-label">You're on the Starter plan</div>
+            <div class="setting-desc">20 AI replies/month, 1 connected inbox, manual approval only.</div>
+          </div>
+          <a href="pricing.html" class="btn btn-gold">Upgrade to Pro — $25/mo</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-auth.js"></script>
+<script>
+  (async () => {
+    const session = await NexaAuth.getSession();
+    if (!session) {
+      window.location.href = 'login.html';
+    } else {
+      const span = document.getElementById('userNameSpan');
+      if (span && session.name) span.textContent = ', ' + session.name.split(' ')[0];
+    }
+  })();
+
+  document.getElementById('logoutBtn').addEventListener('click', async (e) => {
+    e.preventDefault();
+    await NexaAuth.logout();
+    window.location.href = 'login.html';
+  });
+
+  /*
+    Gmail / SMTP connect buttons are placeholders here.
+    Real Gmail connection needs Google OAuth (via Supabase Auth providers
+    or Google Cloud Console credentials) — a visitor's click alone can't
+    grant access to their inbox without that OAuth flow.
+  */
+  document.getElementById('gmailBtn').addEventListener('click', () => {
+    alert('This connects to real Gmail OAuth once your backend is set up. See README for setup steps.');
+  });
+  document.getElementById('smtpBtn').addEventListener('click', () => {
+    alert('This opens SMTP credential fields once your backend is set up. See README for setup steps.');
+  });
+</script>
+
+</body>
+</html>
