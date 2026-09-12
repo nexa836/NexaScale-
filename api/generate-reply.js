@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 Write a short, warm, helpful reply (2-3 sentences max) as if you are the business owner replying directly. Do not use generic corporate language. Keep it natural and specific to what they asked.`;
 
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
