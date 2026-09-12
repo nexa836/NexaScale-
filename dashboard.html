@@ -43,6 +43,23 @@
       </div>
     </div>
 
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Try the AI — live</h2>
+      </div>
+      <div class="panel-body">
+        <div class="field" style="margin-bottom: 12px;">
+          <label for="testLeadMessage">Paste a customer message</label>
+          <input type="text" id="testLeadMessage" placeholder="e.g. Do you have this in size medium?">
+        </div>
+        <button class="btn btn-gold" id="generateReplyBtn">Generate AI reply</button>
+        <div id="aiReplyOutput" style="margin-top: 16px; display: none;">
+          <div class="ai-reply" style="padding: 14px;"></div>
+        </div>
+        <div id="aiReplyError" style="margin-top: 12px; color: var(--danger); font-size: 13px; display: none;"></div>
+      </div>
+    </div>
+
     <div class="panel" id="settings">
       <div class="panel-head">
         <h2>Email connections</h2>
@@ -124,19 +141,52 @@
     window.location.href = 'login.html';
   });
 
-  /*
-    Gmail / SMTP connect buttons are placeholders here.
-    Real Gmail connection needs Google OAuth (via Supabase Auth providers
-    or Google Cloud Console credentials) — a visitor's click alone can't
-    grant access to their inbox without that OAuth flow.
-  */
   document.getElementById('gmailBtn').addEventListener('click', () => {
     alert('This connects to real Gmail OAuth once your backend is set up. See README for setup steps.');
   });
   document.getElementById('smtpBtn').addEventListener('click', () => {
     alert('This opens SMTP credential fields once your backend is set up. See README for setup steps.');
   });
+
+  document.getElementById('generateReplyBtn').addEventListener('click', async () => {
+    const input = document.getElementById('testLeadMessage');
+    const btn = document.getElementById('generateReplyBtn');
+    const outputBox = document.getElementById('aiReplyOutput');
+    const outputText = outputBox.querySelector('.ai-reply');
+    const errorBox = document.getElementById('aiReplyError');
+
+    const leadMessage = input.value.trim();
+    if (!leadMessage) return;
+
+    outputBox.style.display = 'none';
+    errorBox.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Thinking...';
+
+    try {
+      const res = await fetch('/api/generate-reply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leadMessage })
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        errorBox.textContent = data.error || 'Something went wrong.';
+        errorBox.style.display = 'block';
+      } else {
+        outputText.textContent = data.reply;
+        outputBox.style.display = 'block';
+      }
+    } catch (err) {
+      errorBox.textContent = 'Could not reach the AI. Try again.';
+      errorBox.style.display = 'block';
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Generate AI reply';
+  });
 </script>
 
 </body>
-</html>
+  </html>
